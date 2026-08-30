@@ -10,7 +10,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -19,57 +19,126 @@
             justify-content: center;
             align-items: center;
             padding: 2rem;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        /* Animated background container */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            animation: float upward linear infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) scale(1) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(calc(var(--drift) * 100px)) scale(1.5) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Ripple waves */
+        .wave {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: ripple infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0) translate(-50%, -50%);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(2) translate(var(--tx, 0), var(--ty, 0));
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(3) translate(var(--tx, 0), var(--ty, 0));
+                opacity: 0;
+            }
+        }
+
+        body {
+            z-index: 1;
+        }
+
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 3rem;
             max-width: 600px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
+            backdrop-filter: blur(10px);
         }
-        
+
         h1 {
             color: #333;
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
-        
+
         .subtitle {
             color: #666;
             font-size: 1.2rem;
             margin-bottom: 2rem;
         }
-        
+
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
-        
+
         .skill-card {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 1.5rem;
             border-radius: 12px;
             transition: transform 0.3s ease;
         }
-        
+
         .skill-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
-        
+
         .skill-icon {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
-        
+
         .skill-name {
             font-weight: bold;
             color: #333;
         }
-        
+
         .footer {
             margin-top: 2rem;
             padding-top: 1.5rem;
@@ -80,15 +149,18 @@
     </style>
 </head>
 <body>
+    <div class="animated-bg" id="animatedBg"></div>
+
     <div class="container">
+        <p style="margin-bottom: 1rem; text-align: right;"><a href="border-collies/index.html" style="color: #667eea; text-decoration: none; font-size: 0.9rem; font-weight: bold;">→ Border Collies</a></p>
         <h1>Hello! 👋</h1>
         <p class="subtitle">Welcome to my personal homepage</p>
-        
+
         <p style="color: #555; line-height: 1.6;">
-            Hi there! I'm excited to have you here on my digital space. 
+            Hi there! I'm excited to have you here on my digital space.
             This is a simple, clean homepage showcasing what makes me tick.
         </p>
-        
+
         <div class="card-grid">
             <div class="skill-card">
                 <div class="skill-icon">💻</div>
@@ -115,11 +187,64 @@
                 <div class="skill-name">Fast Learner</div>
             </div>
         </div>
-        
+
         <div class="footer">
             <p>Created with ❤️ and ☕</p>
             <p style="margin-top: 0.5rem;">© 2024 yazzia</p>
         </div>
     </div>
+
+    <script>
+        // Create floating particles
+        const bg = document.getElementById('animatedBg');
+        const particleCount = 30;
+        const waveCount = 15;
+
+        // Floating particles
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 8 + 4; // Random size between 4-12px
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100 + 100}%`; // Start below viewport
+            particle.style.animationDuration = `${Math.random() * 20 + 15}s`; // 15-35s duration
+            particle.style.animationDelay = `-${Math.random() * 20}s`; // Negative delay for staggered start
+            
+            bg.appendChild(particle);
+        }
+
+        // Ripple waves
+        for (let i = 0; i < waveCount; i++) {
+            const wave = document.createElement('div');
+            wave.className = 'wave';
+            
+            const size = Math.random() * 300 + 200; // Random size between 200-500px
+            wave.style.width = `${size}px`;
+            wave.style.height = `${size}px`;
+            wave.style.left = `${Math.random() * 100}%`;
+            wave.style.top = `${Math.random() * 100}%`;
+            wave.style.animationDuration = `${Math.random() * 15 + 10}s`; // 10-25s
+            wave.style.animationDelay = `-${Math.random() * 10}s`;
+            
+            bg.appendChild(wave);
+        }
+
+        // Add mouse interaction for subtle parallax
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            // Subtle background gradient shift on mouse move
+            bg.style.filter = `brightness(${0.9 + mouseY * 0.2})`;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            bg.style.filter = 'brightness(1)';
+        });
+    </script>
 </body>
 </html>
+```
