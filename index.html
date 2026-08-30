@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello! I'm yazzia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-name {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello! 👋</h1>
+        <p class="subtitle">Welcome to my personal homepage</p>
+        
+        <p style="color: #555; line-height: 1.6;">
+            Hi there! I'm excited to have you here on my digital space. 
+            This is a simple, clean homepage showcasing what makes me tick.
+        </p>
+        
+        <div class="card-grid">
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <div class="skill-name">Coding</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🔧</div>
+                <div class="skill-name">Automation</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🐙</div>
+                <div class="skill-name">Git/GitHub</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🤖</div>
+                <div class="skill-name">AI Agents</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📐</div>
+                <div class="skill-name">Problem Solving</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">⚡</div>
+                <div class="skill-name">Fast Learner</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Created with ❤️ and ☕</p>
+            <p style="margin-top: 0.5rem;">© 2024 yazzia</p>
+        </div>
+    </div>
+</body>
+</html>
